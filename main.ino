@@ -59,9 +59,6 @@ std::vector<String> airports({
   "KDET"
 });
 
-const char* ssid = "XXXXX";
-const char* password = "YYYYY";
-
 int findAirportIndex(String airportCode){
   for (int i = 0; i < (NUM_AIRPORTS); i++) {
     if( airports[i] == airportCode){
