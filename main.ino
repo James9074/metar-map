@@ -68,18 +68,6 @@ int findAirportIndex(String airportCode){
   return 0;    
 }
 
-void setup() {
-  Serial.begin(9600);
-  pinMode(LED_BUILTIN, OUTPUT); // give us control of the onboard LED
-  digitalWrite(LED_BUILTIN, LOW);
-
-  // Initialize LEDs - Full cyan while connecting to wifi
-  FastLED.addLeds<LED_TYPE, DATA_PIN, COLOR_ORDER>(leds, NUM_AIRPORTS).setCorrection(TypicalLEDStrip);
-  fill_solid(leds, NUM_AIRPORTS, CRGB::Cyan);
-  FastLED.setBrightness(BRIGHTNESS);  
-  FastLED.show();
-}
-
 void setAirport(String airportCode){    
     const char* weather = get_weather(airportCode).c_str();
 
@@ -129,6 +117,18 @@ String extractContent(const String &xmlData, const String &startTag, const Strin
     return ""; // End tag not found
   }
   return xmlData.substring(startIndex, endIndex);
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LED_BUILTIN, OUTPUT); // give us control of the onboard LED
+  digitalWrite(LED_BUILTIN, LOW);
+
+  // Initialize LEDs - Full cyan while connecting to wifi
+  FastLED.addLeds<LED_TYPE, DATA_PIN, COLOR_ORDER>(leds, NUM_AIRPORTS).setCorrection(TypicalLEDStrip);
+  fill_solid(leds, NUM_AIRPORTS, CRGB::Cyan);
+  FastLED.setBrightness(BRIGHTNESS);  
+  FastLED.show();
 }
 
 void loop() {
