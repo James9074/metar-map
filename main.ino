@@ -118,6 +118,19 @@ void setAirport(String airportCode){
     delete[] weatherCopy;        
 }
 
+String extractContent(const String &xmlData, const String &startTag, const String &endTag) {
+  int startIndex = xmlData.indexOf(startTag);
+  if (startIndex == -1) {
+    return ""; // Start tag not found
+  }
+  startIndex += startTag.length(); // Move past the start tag
+  int endIndex = xmlData.indexOf(endTag, startIndex);
+  if (endIndex == -1) {
+    return ""; // End tag not found
+  }
+  return xmlData.substring(startIndex, endIndex);
+}
+
 void loop() {
   // wait for WiFi connection
   ensure_wifi();
